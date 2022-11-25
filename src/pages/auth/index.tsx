@@ -1,6 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 import { useAuth } from "../../contexts/AuthContext";
 import { generateRandomString } from "../../utils/generateRandomString";
 import { getHashParams } from "../../utils/getHashParams";
@@ -51,4 +52,11 @@ export default function Auth() {
       <img src="https://iili.io/H384mR1.png" />
     </div>
   );
+}
+
+export async function getServerSideProps(ctx: any) {
+  const { "trilha.spotify_token": token } = parseCookies(ctx);
+  if (token) return { redirect: { destination: "/home", permanent: false } };
+
+  return { props: {} };
 }
