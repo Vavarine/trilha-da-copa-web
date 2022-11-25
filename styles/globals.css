@@ -27,4 +27,5 @@ a {
 
 .stf__block {
   background-image: url('https://iili.io/H3Ser8u.png');
+  filter: rgba(15, 15, 15, 0.8);
 }
