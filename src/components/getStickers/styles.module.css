@@ -1,6 +1,107 @@
 .getStickers {
+  padding: 0;
   position: fixed;
   bottom: 30px;
-  background-color: transparent;
   right: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.getStickers span {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.getStickers img {
+  height: 157px;
+  width: 157px;
+
+  transition: all 0.2s;
+}
+
+.getStickers:hover img {
+  transform: scale(1.1);
+}
+
+.pupup {
+  position: fixed;
+  padding: 0 128px 45px 128px;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #191414;
+  border-radius: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pupup img {
+  display: block;
+  margin-bottom: 12px;
+  height: 122px;
+  width: 122px;
+}
+
+.pupup span {
+  display: block;
+  max-width: 440px;
+  margin-bottom: 65px;
+  text-align: center;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  padding: 15px;
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.retrieve {
+  height: 46px;
+  width: 206px;
+  border-radius: 100px;
+  background-color: #1ed760;
+  font-size: 18px;
+  color: #191414;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+}
+
+.retrieve:disabled {
+  background-color: #bababa;
+  cursor: default;
+}
+
+.stickersContainer {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  column-gap: 32px;
+}
+
+.stickersContainer img {
+  height: 258px;
+  width: 183px;
 }
