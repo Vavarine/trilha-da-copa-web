@@ -21,11 +21,12 @@ a {
   }
   body {
     color: white;
-    background: gray;
+    background: #1a1414;
+    background-image: url('https://iili.io/HFnARRe.png');
+    background-repeat: no-repeat;
   }
 }
 
-.stf__block {
-  background-image: url('https://iili.io/H3Ser8u.png');
-  filter: rgba(15, 15, 15, 0.8);
+.stf__parent {
+  margin: 0 15rem;
 }

@@ -6,3 +6,8 @@
 .logo {
   padding: 22px 64px;
 }
+
+.login { 
+  float: right;
+  padding: 15px 192px;
+}
