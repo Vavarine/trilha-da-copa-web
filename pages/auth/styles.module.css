@@ -1,0 +1,33 @@
+.container {
+  height: 100vh;
+  background-image: url("https://iili.io/H38V5qG.png");
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container div {
+  padding: 100px 90px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50px 0 0 50px;
+  max-width: 500px;
+}
+
+.container h1 {
+  margin: 0;
+}
+
+.container button {
+  padding: 10px 16px;
+  border-radius: 100px;
+  border: none;
+  font-size: 18px;
+
+  color: white;
+  background-color: #1ed760;
+}
+
+.container img {
+  max-height: calc(100vh - 40px);
+}

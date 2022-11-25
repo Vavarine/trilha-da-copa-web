@@ -1,16 +1,17 @@
 import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useAuth } from "../../contexts/AuthContext";
 import { generateRandomString } from "../../utils/generateRandomString";
 import { getHashParams } from "../../utils/getHashParams";
+
+import styles from "./styles.module.css";
 
 export default function Auth() {
   const router = useRouter();
   const { setSpotifyToken } = useAuth();
   const { asPath } = router;
   const hashParams = getHashParams(asPath);
-
-  console.log("hashParams", hashParams);
 
   if (hashParams.access_token) {
     setSpotifyToken(hashParams.access_token);
@@ -37,5 +38,17 @@ export default function Auth() {
     router.push(url);
   };
 
-  return <button onClick={handleButtonClick}>Logue com o spotify</button>;
+  return (
+    <div className={styles.container}>
+      <div>
+        <h1>Cadastre-se</h1>
+        <p>
+          E garanta o albúm que vai fazer você viajar com as melhores músicas de cada país
+          participante da Copa do mundo 2022
+        </p>
+        <button onClick={handleButtonClick}>Conecte sua conta do Spotify</button>
+      </div>
+      <img src="https://iili.io/H384mR1.png" />
+    </div>
+  );
 }

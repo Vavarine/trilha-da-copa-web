@@ -1,6 +1,5 @@
-import axios from "axios";
-import { setCookie, parseCookies, destroyCookie } from "nookies";
-import { createContext, ReactNode, use, useContext, useEffect, useState } from "react";
+import { setCookie, parseCookies } from "nookies";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { User } from "../global";
 import { getSpotifyApi } from "../services/getSpotifyApi";
 
