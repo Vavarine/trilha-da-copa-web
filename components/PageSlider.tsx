@@ -1,51 +1,24 @@
-import React, { useState } from 'react';
-import { SliderData } from './SliderData';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-import { PageFlip } from 'page-flip';
+import React from 'react';
+import HTMLFlipBook from "react-pageflip";
+import { Page } from './Page';
 
-interface PageSliderProps {
-  slides: PageSliderProps
-  length: number
-}
-
-const PageSlider = ({
-  slides
-}: PageSliderProps) => {
-  const [current, setCurrent] = useState(0);
-  const length = slides.length;
-
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
-
-  if (!Array.isArray(slides) || slides.length <= 0) {
-    return null;
-  }
-
+const PageSlider = () => {
   return (
-    <section className='slider'>
-      <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-      <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
-      {SliderData.map((slide, index) => {
-        return (
-          <div
-            className={index === current ? 'slide active' : 'slide'}
-            key={index}
-          >
-            {index === current && (
-              <div className='page-wrapper'>
-                {slide.pagesSlide}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </section>
-  );
+      <HTMLFlipBook className='sticker-wrapper page' width={900} height={850} >
+        <div className="page page-1">
+          <Page />
+        </div>
+        <div className="page page-2">
+          <Page />
+        </div>
+        <div className="page page-3">
+          <Page />
+        </div>
+        <div className="page page-4">
+          <Page />
+        </div>
+      </HTMLFlipBook>
+  )
 };
 
 export default PageSlider;
