@@ -1,11 +1,7 @@
-import { GetServerSideProps } from "next";
 import { useAuth } from "../contexts/AuthContext";
-import { parseCookies } from "nookies";
-import { getSpotifyApi } from "../services/getSpotifyApi";
-import { User } from "../global";
 
 export default function Index() {
-  const {user} = useAuth()
+  const { user } = useAuth();
   return (
     <div>
       {user ? (

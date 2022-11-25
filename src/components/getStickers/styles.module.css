@@ -1,0 +1,6 @@
+.getStickers {
+  position: fixed;
+  bottom: 30px;
+  background-color: transparent;
+  right: 30px;
+}
