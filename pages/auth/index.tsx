@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useAuth } from "../../contexts/AuthContext";
 import { generateRandomString } from "../../utils/generateRandomString";
@@ -13,6 +14,7 @@ export default function Auth() {
 
   if (hashParams.access_token) {
     setSpotifyToken(hashParams.access_token);
+
     router.push("/");
   }
 
