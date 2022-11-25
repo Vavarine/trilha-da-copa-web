@@ -4,8 +4,6 @@ import { parseCookies } from "nookies";
 export const getSpotifyApi = (ctx?: any) => {
   const { "trilha.spotify_token": token } = parseCookies(ctx);
 
-  console.log("token", token);
-
   const spotifyApi = axios.create({
     baseURL: "https://api.spotify.com/v1",
     headers: {

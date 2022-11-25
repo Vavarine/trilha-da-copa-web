@@ -1,7 +1,7 @@
-import { GetStickers } from "../../components/getStickers";
+import { GetStickers } from "../../components/GetStickers";
 import { Header } from "../../components/Header";
 import PageSlider from "../../components/PageSlider";
-import { parseCookies } from 'nookies';
+import { parseCookies } from "nookies";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
 
 export async function getServerSideProps(ctx: any) {
   const { "trilha.spotify_token": token } = parseCookies(ctx);
-  if (!token) return{redirect:{destination: "/auth", permanent: false}}
-  
-  return{props: {}}
+  if (!token) return { redirect: { destination: "/auth", permanent: false } };
+
+  return { props: {} };
 }

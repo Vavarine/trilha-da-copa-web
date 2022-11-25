@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useAuth } from "../../contexts/AuthContext";
-import { Sticker } from "../../global";
+import { Sticker, UserSticker } from "../../global";
 import { strapiApi } from "../../services/strapiApi";
 import { parseCookies, setCookie } from "nookies";
 import styles from "./styles.module.css";
+import { EarnedSticker } from "./EarnedSticker";
 
 export function GetStickers() {
-  const { user } = useAuth();
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [retrievedStickers, setRetrievedStickers] = useState<Sticker[]>([]);
-  const [isPopUpOpen, setIsPopUpOpen] = useState(true);
   const [hasAlreadyRetrievedStickers, setHasAlreadyRetrievedStickers] = useState(true);
+  const [userStickers, setUserStickers] = useState<UserSticker[]>([]);
+
+  const { user } = useAuth();
+
+  const getUserStickersIds = async () => {
+    if (!user) return [];
+
+    const {
+      data: { data },
+    } = await strapiApi.get(`/user-stickers?filters[email][$eq]=${user.email}&populate=*`);
+
+    setUserStickers(data);
+  };
 
   const getAvailableStickers = async () => {
     const {
@@ -55,17 +68,15 @@ export function GetStickers() {
   };
 
   const handleClosePopUp = () => {
+    setRetrievedStickers([]);
     setIsPopUpOpen(false);
   };
 
   useEffect(() => {
+    getUserStickersIds();
     getAvailableStickers();
     setHasAlreadyRetrievedStickers(!!parseCookies()["trilha.has_retrieved"]);
-  }, []);
-
-  // useEffect(() => {
-  //   saveRetrievedStickers(retrievedStickers);
-  // }, [retrievedStickers]);
+  }, [user]);
 
   return (
     <>
@@ -80,10 +91,7 @@ export function GetStickers() {
           </button>
           <div className={styles.stickersContainer}>
             {retrievedStickers.map((sticker) => (
-              <img
-                key={sticker.id}
-                src={`http://localhost:1337${sticker.attributes.image.data.attributes.url}`}
-              />
+              <EarnedSticker key={sticker.id} sticker={sticker} userStickers={userStickers} />
             ))}
           </div>
           <img src="https://iili.io/HFxER3u.png" alt="" />

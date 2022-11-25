@@ -27,7 +27,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const { data } = await spotifyApi.get("/me");
       setUser(data);
-      console.log("data", data);
     } catch (error) {
       console.log("error", error);
     }
