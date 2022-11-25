@@ -1,3 +1,5 @@
+import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Index() {
@@ -15,4 +17,11 @@ export default function Index() {
       <h1>Home</h1>
     </div>
   );
+}
+
+export async function getServerSideProps(ctx: any) {
+  const { "trilha.spotify_token": token } = parseCookies(ctx);
+  if (!token) return { redirect: { destination: "/auth", permanent: false } };
+
+  return { redirect: { destination: "/home", permanent: false } };
 }
