@@ -37,8 +37,7 @@ const PageSlider = ({
             key={index}
           >
             {index === current && (
-
-              <div className="page-wrapper flip-book">
+              <div className='page-wrapper'>
                 {slide.pagesSlide}
               </div>
             )}
