@@ -1,10 +1,23 @@
 import React from 'react';
 import HTMLFlipBook from "react-pageflip";
+import { useAuth } from '../contexts/AuthContext';
+import { strapiApi } from '../services/strapiApi';
 import { Page } from './Page';
-
-
+import { useEffect } from 'react';
 
 const PageSlider = () => {
+  const {user} = useAuth()
+  console.log(user, "user")
+
+  const getUserStickers = async () => {
+    const {data} = await strapiApi.get(`/user-stickers?filters[email][$eq]=${user?.email}&populate=*`)
+    console.log(data, 'data')
+  }
+  
+  useEffect(() => {
+    if (!user) return
+    getUserStickers()
+  }, [user])
 
   return (
       <HTMLFlipBook className='sticker-wrapper page' width={693} height={1031} >
