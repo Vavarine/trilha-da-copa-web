@@ -7,7 +7,6 @@ export function HomePage() {
         <div>
             <Header/>
             <PageSlider slides={SliderData} />
-            Bonita Home
         </div>
     )
 }

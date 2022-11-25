@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SliderData } from './SliderData';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-import { Page } from './Page';
+import { PageFlip } from 'page-flip';
 
 interface PageSliderProps {
   slides: PageSliderProps
@@ -37,10 +37,9 @@ const PageSlider = ({
             key={index}
           >
             {index === current && (
-              // <img src={slide.image} alt='travel image' className='image' />
-              <div className='page-wrapper'>
-                <Page/>
-                <Page/>
+
+              <div className="page-wrapper flip-book">
+                {slide.pagesSlide}
               </div>
             )}
           </div>
