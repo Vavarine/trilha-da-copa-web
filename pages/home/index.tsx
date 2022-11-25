@@ -2,7 +2,7 @@ import { Header } from "../../components/Header";
 import PageSlider from "../../components/PageSlider";
 import { SliderData } from "../../components/SliderData";
 
-export function Home() {
+export default function Home() {
     return (
         <div>
             <Header/>
