@@ -49,9 +49,6 @@ export function Page({
       </div>
       <div className="sticker-country">{country}</div>
       <div className="sticker-description">{description}</div>
-      {new Array(stickerQt - repeatSticker.length).fill("0").map((sticker) => (
-        <div className="sticker"></div>
-      ))}
     </div>
   );
 }

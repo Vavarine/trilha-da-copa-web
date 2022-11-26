@@ -37,7 +37,7 @@ const PageSlider = () => {
   }, [user]);
 
   return (
-      <HTMLFlipBook className='sticker-wrapper page' width={693} height={1031}>
+      <HTMLFlipBook className='sticker-wrapper page' width={693} height={832}>
         <div className='page cover'></div>
         <div className='page cover'>
           <img className="cover-image" src="https://iili.io/HFzOiap.jpg" alt="Capa do álbum"/>
