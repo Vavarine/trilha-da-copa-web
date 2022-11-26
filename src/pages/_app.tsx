@@ -1,6 +1,7 @@
 import "../styles/PageSlider.css";
 import "../styles/Page.css";
 import "../styles/home.css";
+import "../styles/modal.css";
 import type { AppProps } from "next/app";
 import { AuthProvider } from "../contexts/AuthContext";
 
