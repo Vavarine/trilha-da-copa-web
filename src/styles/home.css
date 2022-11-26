@@ -12,23 +12,55 @@
   padding: 15px 192px;
 }
 
+.cover-image {
+  height: 836px;
+  width: 693px;
+}
+
 .back-cover {
   background-image: url('https://iili.io/HFG9LbI.png');
-  background-size: 693px 1031px;
+  background-size: 693px 836px;
 }
 
 .page-1 {
   background-image: url('https://iili.io/HFEpdOP.png');
-  background-size: 693px 1031px;
+  background-size: 693px 836px;
 }
 
 .page-2 {
   background-image: url('https://iili.io/HFVIB4f.png');
-  background-size: 693px 1031px;
+  background-size: 693px 836px;
 }
 
 .page-3 {
   background-color: #c82834;
+}
+
+.page-4 {
+  background-image: url('https://iili.io/HFWSmHg.png');
+  background-size: 693px 836px;
+}
+
+.page-5 {
+  background-color: #fecb17;
+}
+
+.page-6 {
+  background-image: url('https://iili.io/HFXSqzv.png');
+  background-size: 693px 836px;
+}
+
+.page-7 {
+  background-color: #121212;
+}
+
+.page-8 {
+  background-image: url('https://iili.io/HFXt6jS.png');
+  background-size: 693px 836px;
+}
+
+.page-9 {
+  background-color: #c86625;
 }
 
 .back-cover-title {
@@ -97,17 +129,19 @@
 .sticker-country {
   font-size: 30px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .sticker-description {
-  font-size: 16px;
-  max-width: 488px;
+  font-size: 15px;
+  max-width: 640px;
   margin: 0 auto;
   text-align: center;
 }
 
-.page-3 .sticker-description {
+.page-3 .sticker-description,
+.page-5 .sticker-description,
+.page-7 .sticker-description,
+.page-9 .sticker-description {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
   padding: 10px 25px;
