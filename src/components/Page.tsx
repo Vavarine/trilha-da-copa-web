@@ -3,12 +3,13 @@ import { Sticker } from "../global"
 interface PageProps {
     stickers?: Sticker[]
     text?: string
-    bgImgUrl?: string
+    country?: string
+    description?: string
     stickerQt?: number
+    image?: string
 }
 
-export function Page({stickers = [], text, bgImgUrl, stickerQt = 4}: PageProps) {
-    console.log(stickers, 'sticker filter')
+export function Page({stickers = [], text, country, description, stickerQt = 4, image}: PageProps) {
     const repeatStickerMap = new Map()
 
     stickers.forEach((item) => {
@@ -20,7 +21,9 @@ export function Page({stickers = [], text, bgImgUrl, stickerQt = 4}: PageProps) 
     })
 
     return (
-        <div className="sticker-wrapper">
+        <div className="sticker-container">
+            <div className="sticker-text">{text}</div>
+             <div className="sticker-wrapper">
             {
                 repeatSticker.map(sticker => (
                     <div className="sticker">
@@ -34,6 +37,10 @@ export function Page({stickers = [], text, bgImgUrl, stickerQt = 4}: PageProps) 
                     </div>
                 ))
             }
+            </div>
+            <div className="sponsor-logo"><img src={image}/></div>
+            <div className="sticker-country">{country}</div>
+            <div className="sticker-description">{description}</div>
         </div>
     )
 }
