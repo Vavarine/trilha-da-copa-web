@@ -5,11 +5,14 @@ import type { AppProps } from "next/app";
 import { AuthProvider } from "../contexts/AuthContext";
 
 import "../styles/globals.css";
+import { UserStickersProvider } from "../contexts/UserStickerContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <UserStickersProvider>
+        <Component {...pageProps} />
+      </UserStickersProvider>
     </AuthProvider>
   );
 }

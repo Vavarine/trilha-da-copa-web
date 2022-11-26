@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { setCookie, parseCookies } from "nookies";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { User } from "../global";
@@ -7,6 +8,7 @@ interface IAuthContext {
   spotifyToken?: string;
   setSpotifyToken: (token: string) => void;
   user?: User;
+  logout: () => void;
 }
 
 const AuthContext = createContext({} as IAuthContext);
@@ -14,6 +16,8 @@ const AuthContext = createContext({} as IAuthContext);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [spotifyToken, setSpotifyToken] = useState<string>();
   const [user, setUser] = useState<User>();
+
+  const router = useRouter();
 
   const setSpotifyTokenCookie = (token: string) => {
     setCookie(undefined, "trilha.spotify_token", token, {
@@ -27,10 +31,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const { data } = await spotifyApi.get("/me");
       setUser(data);
-      console.log("data", data);
     } catch (error) {
       console.log("error", error);
     }
+  };
+
+  const logout = () => {
+    setSpotifyToken(undefined);
+    setUser(undefined);
+    setCookie(undefined, "trilha.spotify_token", "", {
+      maxAge: 0,
+    });
+
+    router.push("/");
   };
 
   useEffect(() => {
@@ -60,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [setSpotifyToken, spotifyToken]);
 
   return (
-    <AuthContext.Provider value={{ user, spotifyToken, setSpotifyToken }}>
+    <AuthContext.Provider value={{ user, spotifyToken, setSpotifyToken, logout }}>
       {children}
     </AuthContext.Provider>
   );

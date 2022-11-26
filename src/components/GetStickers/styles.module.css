@@ -16,6 +16,7 @@
   display: block;
   margin-bottom: 20px;
   color: #fff;
+  font-weight: 700;
 }
 
 .getStickers img {
@@ -99,9 +100,4 @@
 
   display: flex;
   column-gap: 32px;
-}
-
-.stickersContainer img {
-  height: 258px;
-  width: 183px;
 }

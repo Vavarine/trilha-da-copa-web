@@ -1,0 +1,45 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container img {
+  height: 258px;
+  width: 183px;
+}
+
+.duplicated img {
+  filter: grayscale(100%) contrast(0.5);
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.container form input {
+  margin-bottom: 12px;
+  height: 38px;
+  width: 183px;
+
+  font-size: 16px;
+  padding: 0 10px;
+
+  background-color: #000;
+  border: solid 1px #cacaca;
+  color: #cacaca;
+}
+
+.container form button {
+  background-color: #00d756;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+
+  font-size: 18px;
+  padding: 5px 20px;
+}

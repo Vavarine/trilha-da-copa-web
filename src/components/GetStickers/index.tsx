@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useAuth } from "../../contexts/AuthContext";
-import { Sticker } from "../../global";
+import { Sticker, UserSticker } from "../../global";
 import { strapiApi } from "../../services/strapiApi";
 import { parseCookies, setCookie } from "nookies";
 import styles from "./styles.module.css";
+import { EarnedSticker } from "./EarnedSticker";
+import { useUserStickers } from "../../contexts/UserStickerContext";
 
 export function GetStickers() {
-  const { user } = useAuth();
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [retrievedStickers, setRetrievedStickers] = useState<Sticker[]>([]);
-  const [isPopUpOpen, setIsPopUpOpen] = useState(true);
   const [hasAlreadyRetrievedStickers, setHasAlreadyRetrievedStickers] = useState(true);
+
+  const { userStickers, updateUserStickers } = useUserStickers();
+
+  const { user } = useAuth();
 
   const getAvailableStickers = async () => {
     const {
@@ -24,14 +29,19 @@ export function GetStickers() {
     const availableStickers = await getAvailableStickers();
     const isUserPremium = user?.product === "premium";
 
-    const stickersToRetrieve = new Array(isUserPremium ? 4 : 3)
-      .fill(0)
-      .map(() => availableStickers[Math.floor(Math.random() * availableStickers.length)]);
+    const stickersToRetrieve = new Array(isUserPremium ? 4 : 3).fill(0).reduce((acc, curr) => {
+      let sticker = availableStickers[Math.floor(Math.random() * availableStickers.length)];
+      while (acc.includes(sticker)) {
+        sticker = availableStickers[Math.floor(Math.random() * availableStickers.length)];
+      }
+      return [...acc, sticker];
+    }, [] as Sticker[]);
 
     setRetrievedStickers(stickersToRetrieve);
     setHasAlreadyRetrievedStickers(true);
 
-    saveRetrievedStickers(stickersToRetrieve);
+    await saveRetrievedStickers(stickersToRetrieve);
+    updateUserStickers();
 
     setCookie(undefined, "trilha.has_retrieved", "true", {
       maxAge: 60 * 60 * 24, // 1 day
@@ -55,17 +65,14 @@ export function GetStickers() {
   };
 
   const handleClosePopUp = () => {
+    setRetrievedStickers([]);
     setIsPopUpOpen(false);
   };
 
   useEffect(() => {
     getAvailableStickers();
     setHasAlreadyRetrievedStickers(!!parseCookies()["trilha.has_retrieved"]);
-  }, []);
-
-  // useEffect(() => {
-  //   saveRetrievedStickers(retrievedStickers);
-  // }, [retrievedStickers]);
+  }, [user]);
 
   return (
     <>
@@ -80,10 +87,7 @@ export function GetStickers() {
           </button>
           <div className={styles.stickersContainer}>
             {retrievedStickers.map((sticker) => (
-              <img
-                key={sticker.id}
-                src={`http://localhost:1337${sticker.attributes.image.data.attributes.url}`}
-              />
+              <EarnedSticker key={sticker.id} sticker={sticker} userStickers={userStickers} />
             ))}
           </div>
           <img src="https://iili.io/HFxER3u.png" alt="" />

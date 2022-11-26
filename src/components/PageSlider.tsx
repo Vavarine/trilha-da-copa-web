@@ -1,38 +1,40 @@
-import React from 'react';
+import React from "react";
 import HTMLFlipBook from "react-pageflip";
-import { useAuth } from '../contexts/AuthContext';
-import { strapiApi } from '../services/strapiApi';
-import { Page } from './Page';
-import { useEffect, useState } from 'react';
-import { Sticker } from '../global';
+import { useAuth } from "../contexts/AuthContext";
+import { strapiApi } from "../services/strapiApi";
+import { Page } from "./Page";
+import { useEffect, useState } from "react";
+import { Sticker } from "../global";
 
 const PageSlider = () => {
-  const [userStickers, setUserStickers] = useState([])
+  const [userStickers, setUserStickers] = useState([]);
 
-  const {user} = useAuth()
-  console.log(user, "user")
+  const { user } = useAuth();
 
   const getUserStickers = async () => {
-    const {data: {data}} = await strapiApi.get(`/user-stickers?filters[email][$eq]=${user?.email}&populate=*`)
-    console.log(data, 'data')
+    const {
+      data: { data },
+    } = await strapiApi.get(`/user-stickers?filters[email][$eq]=${user?.email}&populate=*`);
 
     const userStickerIds = data.map((item: any) => {
-      return item.attributes.sticker.data.id
-    })
-    console.log(userStickerIds, 'IDs')
-    
-    const userStickers = await Promise.all( userStickerIds.map(async (id: number) => {
-      const {data: {data: stickerData}} = await strapiApi.get(`/stickers/${id}?populate=*`)
-      return stickerData
-    }))
-    console.log(userStickers, 'user stickers')
-    setUserStickers(userStickers as any)
-  }
-  
+      return item.attributes.sticker.data.id;
+    });
+
+    const userStickers = await Promise.all(
+      userStickerIds.map(async (id: number) => {
+        const {
+          data: { data: stickerData },
+        } = await strapiApi.get(`/stickers/${id}?populate=*`);
+        return stickerData;
+      })
+    );
+    setUserStickers(userStickers as any);
+  };
+
   useEffect(() => {
-    if (!user) return
-    getUserStickers()
-  }, [user])
+    if (!user) return;
+    getUserStickers();
+  }, [user]);
 
   return (
       <HTMLFlipBook className='sticker-wrapper page' width={693} height={1031}>
