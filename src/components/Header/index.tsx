@@ -6,10 +6,8 @@ import { FiExternalLink } from "react-icons/fi";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const userHasImage = user?.images?.length;
-
-  console.log({ user });
 
   const toggleMenuIsOpen = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,11 +25,11 @@ export function Header() {
         />
         {isMenuOpen && (
           <div>
-            <a href={user?.external_urls.spotify}>
+            <a href={user?.external_urls.spotify} target="_blanc">
               Conta
               <FiExternalLink />
             </a>
-            <button>Sair</button>
+            <button onClick={logout}>Sair</button>
           </div>
         )}
       </div>

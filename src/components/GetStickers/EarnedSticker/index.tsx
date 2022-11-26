@@ -25,8 +25,6 @@ export function EarnedSticker({ sticker, userStickers }: StickerProps) {
 
     if (!userEarnedSticker) return;
 
-    console.log(userEarnedSticker);
-
     try {
       await strapiApi.delete(`/user-stickers/${userEarnedSticker.id}`);
       await strapiApi.post("/user-stickers", {

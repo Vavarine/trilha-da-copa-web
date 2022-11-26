@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { useAuth } from "../../contexts/AuthContext";
 import { useUserStickers } from "../../contexts/UserStickerContext";
 import { UserSticker } from "../../global";
-import { strapiApi } from "../../services/strapiApi";
 
 import styles from "./styles.module.css";
 
