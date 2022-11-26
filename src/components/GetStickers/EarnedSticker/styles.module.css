@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: visible;
 }
 
 .container img {
@@ -14,14 +15,14 @@
   filter: grayscale(100%) contrast(0.5);
 }
 
-.container form {
+.container .content {
   display: flex;
   flex-direction: column;
 
   align-items: center;
 }
 
-.container form input {
+.container .content input {
   margin-bottom: 12px;
   height: 38px;
   width: 183px;
@@ -34,7 +35,7 @@
   color: #cacaca;
 }
 
-.container form button {
+.container .content button {
   background-color: #00d756;
   color: #fff;
   border: none;
@@ -42,4 +43,38 @@
 
   font-size: 18px;
   padding: 5px 20px;
+}
+
+.modal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal div {
+  display: flex;
+  column-gap: 12px;
+}
+.modal p {
+  margin: 0px;
+  margin-bottom: 45px;
+}
+
+.modal div button {
+  height: 48px;
+  width: 150px;
+
+  border-radius: 50px;
+  border: none;
+  background-color: #1ed760;
+  color: #fff;
+  font-size: 16px;
+}
+
+.modal div button.cancel {
+  background-color: transparent;
+  border: 2px solid #fff;
 }
