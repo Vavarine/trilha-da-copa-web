@@ -6,24 +6,16 @@ import { strapiApi } from "../../services/strapiApi";
 import { parseCookies, setCookie } from "nookies";
 import styles from "./styles.module.css";
 import { EarnedSticker } from "./EarnedSticker";
+import { useUserStickers } from "../../contexts/UserStickerContext";
 
 export function GetStickers() {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [retrievedStickers, setRetrievedStickers] = useState<Sticker[]>([]);
   const [hasAlreadyRetrievedStickers, setHasAlreadyRetrievedStickers] = useState(true);
-  const [userStickers, setUserStickers] = useState<UserSticker[]>([]);
+
+  const { userStickers, updateUserStickers } = useUserStickers();
 
   const { user } = useAuth();
-
-  const getUserStickersIds = async () => {
-    if (!user) return [];
-
-    const {
-      data: { data },
-    } = await strapiApi.get(`/user-stickers?filters[email][$eq]=${user.email}&populate=*`);
-
-    setUserStickers(data);
-  };
 
   const getAvailableStickers = async () => {
     const {
@@ -37,14 +29,19 @@ export function GetStickers() {
     const availableStickers = await getAvailableStickers();
     const isUserPremium = user?.product === "premium";
 
-    const stickersToRetrieve = new Array(isUserPremium ? 4 : 3)
-      .fill(0)
-      .map(() => availableStickers[Math.floor(Math.random() * availableStickers.length)]);
+    const stickersToRetrieve = new Array(isUserPremium ? 4 : 3).fill(0).reduce((acc, curr) => {
+      let sticker = availableStickers[Math.floor(Math.random() * availableStickers.length)];
+      while (acc.includes(sticker)) {
+        sticker = availableStickers[Math.floor(Math.random() * availableStickers.length)];
+      }
+      return [...acc, sticker];
+    }, [] as Sticker[]);
 
     setRetrievedStickers(stickersToRetrieve);
     setHasAlreadyRetrievedStickers(true);
 
-    saveRetrievedStickers(stickersToRetrieve);
+    await saveRetrievedStickers(stickersToRetrieve);
+    updateUserStickers();
 
     setCookie(undefined, "trilha.has_retrieved", "true", {
       maxAge: 60 * 60 * 24, // 1 day
@@ -73,7 +70,6 @@ export function GetStickers() {
   };
 
   useEffect(() => {
-    getUserStickersIds();
     getAvailableStickers();
     setHasAlreadyRetrievedStickers(!!parseCookies()["trilha.has_retrieved"]);
   }, [user]);

@@ -2,6 +2,7 @@ import { GetStickers } from "../../components/GetStickers";
 import { Header } from "../../components/Header";
 import PageSlider from "../../components/PageSlider";
 import { parseCookies } from "nookies";
+import { ProgressBar } from "../../components/ProgressBar";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <Header />
       <PageSlider />
       <GetStickers />
+      <ProgressBar />
     </div>
   );
 }

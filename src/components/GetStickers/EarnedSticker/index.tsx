@@ -12,9 +12,9 @@ export function EarnedSticker({ sticker, userStickers }: StickerProps) {
   const [hasTransferredSticker, setHasTransferredSticker] = useState(false);
   const [email, setEmail] = useState("");
 
-  const isStickerDuplicated = userStickers.some(
-    (userSticker) => userSticker.attributes.sticker.data.id === sticker.id
-  );
+  const isStickerDuplicated =
+    userStickers.filter((userSticker) => userSticker.attributes.sticker.data.id === sticker.id)
+      .length > 1;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
