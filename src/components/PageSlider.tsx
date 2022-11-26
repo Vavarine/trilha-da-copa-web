@@ -37,7 +37,7 @@ const PageSlider = () => {
   }, [user]);
 
   return (
-      <HTMLFlipBook className='sticker-wrapper page' width={693} height={832}>
+      <HTMLFlipBook className='sticker-wrapper page' width={693} height={836}>
         <div className='page cover'></div>
         <div className='page cover'>
           <img className="cover-image" src="https://iili.io/HFzOiap.jpg" alt="Capa do álbum"/>
@@ -134,14 +134,32 @@ const PageSlider = () => {
                 return sticker.attributes.category.data.attributes.name === 'Zé Delivery'
               })
             }
+            description = {
+              "Aproveite os mimos que separamos especialmente para você acompanhar a copa com tudo o que precisa! Peça no Zé Delivery e receba sua cerveja GELADA na porta de casa para não perder 1 minuto de jogo!"
+            }
+            stickerQt = {
+              2
+            }
+            image = {
+              "https://iili.io/HFXNkru.png"
+            }
           />
         </div>
         <div className="page page-6">
           <Page 
+            text = {
+              "Acesse o Spotify e, na área de busca, selecione o ícone de câmera para escanear o código ou o print da figurinha para acessar a música/playlist escolhida"
+             }
             stickers = {
               userStickers.filter((sticker: Sticker) => {
                 return sticker.attributes.category.data.attributes.name === 'Estados Unidos'
               })
+            }
+            country = {
+              "ESTADOS UNIDOS"
+            }
+            description = {
+              "A equipe está classificada como a 27ª melhor do mundo no Ranking Mundial da FIFA e é uma das melhores seleções da CONCACAF."
             }
           />
         </div>
@@ -152,14 +170,32 @@ const PageSlider = () => {
                 return sticker.attributes.category.data.attributes.name === 'Tik Tok'
               })
             }
+            description = {
+              "Melhores hits, melhores dancinhas, melhores receitas e muito mais! Acesse as playlists mais bombásticas do Spotify e treine suas dancinhas para não sair da For You no Tiktok!"
+            }
+            stickerQt = {
+              2
+            }
+            image = {
+              "https://iili.io/HFX65iv.png"
+            }
           />
         </div>
         <div className="page page-8">
           <Page 
+          text = {
+            "Acesse o Spotify e, na área de busca, selecione o ícone de câmera para escanear o código ou o print da figurinha para acessar a música/playlist escolhida"
+           }
             stickers = {
               userStickers.filter((sticker: Sticker) => {
                 return sticker.attributes.category.data.attributes.name === 'Japão'
               })
+            }
+            country = {
+              "JAPÃO"
+            }
+            description = {
+              "A Seleção Japonesa de Futebol representa o Japão nas competições de futebol da FIFA. É filiada à instituição desde 1929.  Já disputaram seis Copas do Mundo, sendo uma das mais bem sucedidas seleções asiáticas dos últimos tempos."
             }
           />
         </div>
@@ -169,6 +205,15 @@ const PageSlider = () => {
               userStickers.filter((sticker: Sticker) => {
                 return sticker.attributes.category.data.attributes.name === 'Crunchyroll'
               })
+            }
+            description = {
+              "Nem só de futebol vive o homem. Aproveite a pausa entre os jogos e confira a maior seleção de animes no Crunchroll! Acesse agora e confira!"
+            }
+            stickerQt = {
+              2
+            }
+            image = {
+              "https://iili.io/HFhdHEN.png"
             }
           />
         </div>
